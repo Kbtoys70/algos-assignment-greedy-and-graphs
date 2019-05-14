@@ -1,6 +1,6 @@
 /**
  * Physics Experiment
- * Author: Your Name and Carolyn Yao
+ * Author: Kevin Balderrama and Carolyn Yao
  * Does this compile or finish running within 5 seconds? Y/N
  */
 
@@ -32,13 +32,45 @@ public class PhysicsExperiment {
     int numStudents,
     int numSteps,
     int[][] signUpTable
-  ) {
+  ) 
+  {
     // Your scheduleTable is initialized as all 0's so far. Your code will put 1's
     // in the table in the right places based on the return description
     int[][] scheduleTable = new int[numStudents + 1][numSteps + 1];
 
     // Your code goes here
-
+    int longest=0;//student with longest chain
+    int	current=0;//current longest chain
+    int	temp = 0;//temp longest chain of student
+    for(int num=1;num<=numSteps;num++)
+    {
+    	current = 0;
+		longest = 0;
+    	for(int student=1;student<signUpTable.length;student++)
+    	{
+    		for(int studentList=num;studentList<signUpTable[student].length;studentList++)
+    		{
+    			if(signUpTable[student][studentList]==1) {
+    				temp++;
+    			}
+    			else	break;
+    		}
+    		if(temp>current)
+    		{
+    			longest = student;
+    			current = temp;
+    		}
+    		temp = 0;
+    	}
+    	for(int j=num;j<(num+current);j++)
+		{
+			scheduleTable[longest][j] = 1;
+		}
+		num += current-1;
+    }
+    
+    
+    // Your code goes here
     return scheduleTable;
   }
 
